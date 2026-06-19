@@ -3,7 +3,15 @@ The app should parse the command, validate the input, create a task object, save
 The user runs commands like:
 
 > tasker add "study Dart" --priority high --due 2026-06-20
+
+
 > tasker list
+
+
 > tasker done 3
+
+
 > tasker delete 5
+
+
 > tasker search "study"
