@@ -1,5 +1,4 @@
-import 'dart:ffi';
-import 'dart:io'; // Add this line at the top
+import 'package:tasker/task.dart';
 
 const version = "0.0.1";
 void main(List<String> arguments) {
@@ -22,18 +21,4 @@ void printUsage() {
   );
   print("Syntax: dart /bin/tasker.dart <command>");
   print("Available commands: 'add','search','help'");
-}
-
-void searchTask(List<String>? input) {
-  final String task;
-  if (input == null || input.isEmpty) {
-    print("Please provide a task Title to search");
-    task = stdin.readLineSync() ?? '';
-    print("you seached the task: $task \n -->Implementation will come later");
-  } else {
-    task = input.join(' ');
-  }
-  print('Looking up Tasks about "$task". Please wait.');
-  print('Here ya go!');
-  print('(Pretend this is "$task")');
 }
