@@ -39,19 +39,24 @@ class Task {
 }
 
 void searchTask(List<String>? input) async {
-  final String taskTitle;
+  final String? taskTitle;
   if (input == null || input.isEmpty) {
     print("Please provide a task Title to search");
-    taskTitle = stdin.readLineSync() ?? '';
-    print(
-      "you seached the task: $taskTitle \n -->Implementation will come later",
-    );
+    taskTitle = stdin.readLineSync();
+    if (taskTitle == null || taskTitle.isEmpty) {
+      print('No task Title provided. Exiting.');
+      return;
+    }
   } else {
     taskTitle = input.join(' ');
   }
   print('Looking up Tasks about "$taskTitle". Please wait.');
   print('Here ya go!');
   var results = await getTask(taskTitle);
+  if (results.isEmpty) {
+    print("Could not find task");
+    return;
+  }
   print(results.length > 1 ? results : results.first);
 }
 
