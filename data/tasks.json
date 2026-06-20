@@ -2,11 +2,14 @@
      "title": "Learn Dart",
       "status": "Ongoing",
       "description": "I need to learn Dart so I can learn Flutter so I can build two projects so I can open a Business(profitable)",
-      "due date": "2027-01-01"
+      "due date": "2027-01-01",
+      "crucial" : true
 },
 {
-     "title": "Learn Dart",
+     "title": "Play WoW",
       "status": "Completed",
       "description": "takhra fih",
-      "due date": "2027-01-01"
+      "due date": "2027-01-01",
+      "crucial" : false
+
 }]

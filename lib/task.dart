@@ -4,14 +4,16 @@ import 'dart:io';
 class Task {
   final String title;
   final TaskStatus status;
-  final String description;
+  final String? description;
   final DateTime? duteDate;
+  bool crucial = false;
 
   Task({
     required this.title,
     required this.status,
     required this.description,
     required this.duteDate,
+    required this.crucial,
   });
 
   factory Task.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class Task {
       status: json['status'].toString().getStatus(),
       description: json['description'].toString(),
       duteDate: DateTime.tryParse(json['due date']),
+      crucial: bool.parse(json["crucial"]),
     );
   }
 
@@ -29,12 +32,13 @@ class Task {
       status: status.name,
       description: description,
       duteDate: duteDate?.toIso8601String(),
+      crucial: crucial,
     };
   }
 
   @override
   String toString() {
-    return "Task title: $title \n --->Description: $description \n --->Due Date: $duteDate \n --->Status: ${status.name} \n \n";
+    return "Task title: $title \n --->Description: $description \n --->Due Date: $duteDate \n --->Status: ${status.name} \n \n \n";
   }
 }
 
