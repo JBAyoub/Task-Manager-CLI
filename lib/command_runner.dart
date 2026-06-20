@@ -15,7 +15,8 @@ var parser = ArgParser()
     abbr: "s",
     defaultsTo: "fresh",
     allowed: TaskStatus.values.convert(),
-  );
+  )
+  ..addCommand("add");
 
 extension on List<TaskStatus> {
   List<String>? convert() {
@@ -45,11 +46,12 @@ void run(List<String>? inputArgs) {
   print("crucial is ${results.flag("crucial")}");
   print("description is ${results.option("description")}");
   print("title is ${results.option("title")}");
+  print("command is ${results.command?.name}");
 }
 
 void printUsage() {
   print(
-    "You can use this app to manage & perform all kinds of operations on your tasks",
+    "You can use this app to Create & Perform all kinds of operations on your tasks",
   );
   print("Syntax: dart /bin/tasker.dart <command>");
   print("Available commands: 'add','search','help'");
