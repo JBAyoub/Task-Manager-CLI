@@ -1,15 +1,37 @@
-[{
-     "title": "Learn Dart",
-      "status": "Ongoing",
-      "description": "I need to learn Dart so I can learn Flutter so I can build two projects so I can open a Business(profitable)",
-      "due date": "2027-01-01",
-      "crucial" : true
-},
-{
-     "title": "Play WoW",
-      "status": "Completed",
-      "description": "takhra fih",
-      "due date": "2027-01-01",
-      "crucial" : false
-
-}]
+[
+      {
+            "title": "Learn Dart",
+            "status": "Ongoing",
+            "description": "I need to learn Dart so I can learn Flutter so I can build two projects so I can open a Business(profitable)",
+            "due date": "2027-01-01T00:00:00.000",
+            "crucial": true
+      },
+      {
+            "title": "Play WoW",
+            "status": "Completed",
+            "description": "takhra fih",
+            "due date": "2027-01-01T00:00:00.000",
+            "crucial": false
+      },
+      {
+            "title": "what the fuck",
+            "status": "Fresh",
+            "description": "No description was given.",
+            "due date": "2026-06-20T17:50:59.856329",
+            "crucial": true
+      },
+      {
+            "title": "hello madafaka",
+            "status": "Fresh",
+            "description": "man fuck you i'll see you at work",
+            "due date": "2027-01-01T00:00:00.000",
+            "crucial": false
+      },
+      {
+            "title": "hoe",
+            "status": "Ongoing",
+            "description": "man fuck you i'll see you at work",
+            "due date": "2027-01-01T00:00:00.000",
+            "crucial": false
+      }
+]

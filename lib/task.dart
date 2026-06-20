@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:args/args.dart';
+import 'package:collection/collection.dart';
+
 class Task {
   final String title;
   final TaskStatus status;
@@ -22,17 +25,17 @@ class Task {
       status: json['status'].toString().getStatus(),
       description: json['description'].toString(),
       duteDate: DateTime.tryParse(json['due date']),
-      crucial: bool.parse(json["crucial"]),
+      crucial: json["crucial"],
     );
   }
 
   Map<dynamic, dynamic> toJson() {
     return {
-      title: title,
-      status: status.name,
-      description: description,
-      duteDate: duteDate?.toIso8601String(),
-      crucial: crucial,
+      "title": title,
+      "status": status.name,
+      "description": description,
+      "due date": duteDate?.toIso8601String(),
+      "crucial": crucial,
     };
   }
 
@@ -42,46 +45,48 @@ class Task {
   }
 }
 
-void searchTask(List<String>? input) async {
-  final String? taskTitle;
-  if (input == null || input.isEmpty) {
-    print("Please provide a task Title to search");
-    taskTitle = stdin.readLineSync();
-    if (taskTitle == null || taskTitle.isEmpty) {
-      print('No task Title provided. Exiting.');
-      return;
-    }
-  } else {
-    taskTitle = input.join(' ');
+Future<Task?> searchTask(String taskTitle) async {
+  if (taskTitle.isEmpty) {
+    throw ArgParserException("No title was provided. Exiting");
   }
-  print('Looking up Tasks about "$taskTitle". Please wait.');
-  print('Here ya go!');
-  var results = await getTask(taskTitle);
-  if (results.isEmpty) {
-    print("Could not find task");
-    return;
-  }
-  print(results.length > 1 ? results : results.first);
+  Task? result = await getTask(taskTitle);
+  return result;
 }
 
-Future<List<Task>> getTask(String taskName) async {
+Future<Task?> getTask(String taskName) async {
   final taskList = await loadTasks();
-  List<Task> listOfTasks = [];
-  listOfTasks.addAll(taskList.where((task) => task.title == taskName));
-  return listOfTasks;
+  Task? taskFound = taskList.firstWhereOrNull((t) => t.title == taskName);
+  return taskFound;
+}
+
+Future<void> checkFileOrCreate(File f) async {
+  if (!await f.exists()) {
+    final dir = Directory("data");
+    if (!await dir.exists()) {
+      await dir.create(recursive: true);
+      await f.writeAsString('[]');
+    }
+  }
 }
 
 Future<List<Task>> loadTasks() async {
   final file = File("data/tasks.json");
-  if (!await file.exists()) {
-    final dir = Directory("data");
-    if (!await dir.exists()) {
-      await dir.create(recursive: true);
-      await file.writeAsString('[]');
-    }
-  }
+  checkFileOrCreate(file);
   final decoded = jsonDecode(await file.readAsString()) as List;
   return decoded.map((json) => Task.fromJson(json)).toList();
+}
+
+Future<void> addTask(Task task) async {
+  final tasks = await loadTasks();
+  tasks.add(task);
+  await saveTasks(tasks);
+}
+
+Future<void> saveTasks(List<Task> tasks) async {
+  final file = File("data/tasks.json");
+  checkFileOrCreate(file);
+  final jsonList = tasks.map((task) => task.toJson()).toList();
+  await file.writeAsString(jsonEncode(jsonList));
 }
 
 // ignore: constant_identifier_names
