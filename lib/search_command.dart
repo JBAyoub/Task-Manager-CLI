@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:args/args.dart';
 import 'package:tasker/task.dart';
 
@@ -10,27 +12,37 @@ ArgParser parser = ArgParser()
   ..addCommand("search", searchCommand);
 
 Future<void> displaySearch(List<String>? inputArgs) async {
+  String? taskTitle;
   if (inputArgs == null || inputArgs.isEmpty || inputArgs.length == 1) {
-    print("No arguments were provided for the command. Exiting.");
-    return;
-  }
-  ArgResults searchResult = parser.parse(inputArgs);
-  if (searchResult["title"] != null) {
-    final String taskTitle = searchResult["title"];
-    try {
+    printUsage();
+    print("Please a task title: ");
+    taskTitle = stdin.readLineSync() ?? '';
+    if (taskTitle == '') {
+      print("No task title was provided. Exiting");
+
+      return;
+    } else {
       final Task? t = await searchTask(taskTitle.toLowerCase());
       print(t ?? "No task titled $taskTitle was found!");
-    } catch (e) {
-      if (e is Exception) {
-        print(e.toString());
+    }
+  } else {
+    ArgResults searchResult = parser.parse(inputArgs);
+    if (searchResult["title"] != null) {
+      try {
+        final Task? t = await searchTask(searchResult["title"].toLowerCase());
+        print(t ?? "No task titled ${searchResult["title"]} was found!");
+      } catch (e) {
+        if (e is Exception) {
+          print(e.toString());
+        }
       }
     }
-  }
-  if (searchResult["all"]) {
-    await displayAll();
-  }
-  if (searchResult["help"]) {
-    printUsage();
+    if (searchResult["all"]) {
+      await displayAll();
+    }
+    if (searchResult["help"]) {
+      printUsage();
+    }
   }
 }
 
