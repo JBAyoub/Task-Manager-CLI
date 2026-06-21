@@ -11,16 +11,15 @@ ArgParser parser = ArgParser()
 
 Future<void> displaySearch(List<String>? inputArgs) async {
   if (inputArgs == null || inputArgs.isEmpty || inputArgs.length == 1) {
-    throw ArgParserException(
-      "No arguments were provided for the command. Exiting.",
-    );
+    print("No arguments were provided for the command. Exiting.");
+    return;
   }
   ArgResults searchResult = parser.parse(inputArgs);
   if (searchResult["title"] != null) {
     final String taskTitle = searchResult["title"];
     try {
       final Task? t = await searchTask(taskTitle.toLowerCase());
-      print(t);
+      print(t ?? "No task titled $taskTitle was found!");
     } catch (e) {
       if (e is Exception) {
         print(e.toString());

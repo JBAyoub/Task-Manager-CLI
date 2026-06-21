@@ -59,20 +59,24 @@ Future<Task?> getTask(String taskName) async {
   return taskFound;
 }
 
-Future<void> checkFileOrCreate(File f) async {
-  if (!await f.exists()) {
-    final dir = Directory("data");
-    if (!await dir.exists()) {
-      await dir.create(recursive: true);
-      await f.writeAsString('[]');
-    }
+Future<void> checkFileOrCreate(File file) async {
+  final dir = Directory('data');
+
+  if (!await dir.exists()) {
+    print('Creating data directory...');
+    await dir.create(recursive: true);
+  }
+
+  if (!await file.exists()) {
+    print('Creating tasks.json...');
+    await file.writeAsString('[]');
   }
 }
 
 Future<List<Task>> loadTasks() async {
-  final file = File("data/tasks.json");
-  checkFileOrCreate(file);
-  final decoded = jsonDecode(await file.readAsString()) as List;
+  await checkFileOrCreate(File("data/tasks.json"));
+  final decoded =
+      jsonDecode(await File("data/tasks.json").readAsString()) as List;
   return decoded.map((json) => Task.fromJson(json)).toList();
 }
 
