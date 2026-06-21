@@ -1,9 +1,11 @@
 import 'package:args/args.dart';
 import 'package:tasker/add_command.dart';
+import 'package:tasker/search_command.dart';
 
 void run(List<String>? inputArgs) {
   const version = "0.0.1";
   if (inputArgs == null || inputArgs.isEmpty || inputArgs.first == "help") {
+    printUsage();
     throw ArgParserException("No arguments were provided. Exiting.");
   } else if (inputArgs.first == "-v" || inputArgs.first == "version") {
     print("Tasker CLI Version: $version");
@@ -16,6 +18,7 @@ void run(List<String>? inputArgs) {
     case "delete":
       break;
     case "search":
+      displaySearch(inputArgs);
       break;
     case "update":
   }

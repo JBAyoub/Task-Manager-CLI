@@ -21,7 +21,7 @@ class Task {
 
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(
-      title: json['title'],
+      title: json['title'].toString().toLowerCase(),
       status: json['status'].toString().getStatus(),
       description: json['description'].toString(),
       duteDate: DateTime.tryParse(json['due date']),
