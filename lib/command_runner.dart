@@ -1,5 +1,6 @@
 import 'package:args/args.dart';
 import 'package:tasker/add_command.dart';
+import 'package:tasker/delete_command.dart';
 import 'package:tasker/search_command.dart';
 
 void run(List<String>? inputArgs) {
@@ -16,6 +17,7 @@ void run(List<String>? inputArgs) {
       add(inputArgs);
       break;
     case "delete":
+      deleteTask(inputArgs);
       break;
     case "search":
       displaySearch(inputArgs);
