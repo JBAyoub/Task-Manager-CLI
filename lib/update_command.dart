@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:collection/collection.dart';
 import 'package:tasker/task.dart';
 
 void printUsage() {
