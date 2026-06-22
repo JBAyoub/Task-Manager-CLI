@@ -22,15 +22,15 @@ Future<void> displaySearch(List<String>? inputArgs) async {
 
       return;
     } else {
-      final Task? t = await searchTask(taskTitle.toLowerCase());
-      print(t ?? "No task titled $taskTitle was found!");
+      final ts = await searchTask(taskTitle.toLowerCase());
+      print(ts ?? "No task that contains $taskTitle was found!");
     }
   } else {
     final searchResult = searchParser.parse(inputArgs);
     if (searchResult["title"] != null) {
       try {
-        final Task? t = await searchTask(searchResult["title"].toLowerCase());
-        print(t ?? "No task titled ${searchResult["title"]} was found!");
+        final ts = await searchTask(searchResult["title"].toLowerCase());
+        print(ts ?? "No task titled ${searchResult["title"]} was found!");
       } catch (e) {
         if (e is Exception) {
           print(e.toString());

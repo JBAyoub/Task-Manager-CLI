@@ -121,6 +121,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  id_generator:
+    dependency: "direct main"
+    description:
+      name: id_generator
+      sha256: b26badf4fc1dee0d287ad6505c39d50859ebec8d9e6ce0d2b7d91dd01bc3cdd3
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   io:
     dependency: transitive
     description:

@@ -24,21 +24,14 @@ Future<void> add(List<String>? args) async {
     return;
   } else {
     final results = addParser.parse(args);
-    var taskExists = await searchTask(results["title"]);
-    if (taskExists != null) {
-      print("Task already exists");
-      return;
-    }
-    if (taskExists == null) {
-      Task task = Task(
-        title: results["title"],
-        status: results["status"].toString().toLowerCase().getStatus(),
-        description: results["description"],
-        dueDate: DateTime.parse(results["due"]),
-        crucial: results["crucial"],
-      );
-      await addTask(task);
-    }
+    Task task = Task(
+      title: results["title"],
+      status: results["status"].toString().toLowerCase().getStatus(),
+      description: results["description"],
+      dueDate: DateTime.parse(results["due"]),
+      crucial: results["crucial"],
+    );
+    await addTask(task);
   }
 }
 

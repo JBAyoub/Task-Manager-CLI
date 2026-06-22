@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:id_generator/id_generator.dart';
 import 'package:args/args.dart';
-import 'package:collection/collection.dart';
 
 class Task {
+  String id;
   String title;
   TaskStatus status;
   String? description;
@@ -12,16 +12,18 @@ class Task {
   bool crucial = false;
 
   Task({
+    String? id,
     required this.title,
     required this.status,
     required this.description,
     required this.dueDate,
     required this.crucial,
-  });
+  }) : id = id ?? IDGenerator.customMix(10, [IdgEnum.nums, IdgEnum.alpha]);
 
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(
-      title: json['title'].toString().toLowerCase(),
+      id: json['id'],
+      title: json['title'].toString(),
       status: json['status'].toString().getStatus(),
       description: json['description'].toString(),
       dueDate: DateTime.tryParse(json['due date']),
@@ -31,6 +33,7 @@ class Task {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       "title": title,
       "status": status.name,
       "description": description,
@@ -41,22 +44,24 @@ class Task {
 
   @override
   String toString() {
-    return "Task title: $title \n --->Description: $description \n --->Due Date: $dueDate \n --->Status: ${status.name} \n \n \n";
+    return " Task ID:$id\n Task title: $title \n --->Description: $description \n --->Due Date: $dueDate \n --->Status: ${status.name} \n \n \n";
   }
 }
 
-Future<Task?> searchTask(String taskTitle) async {
+Future<List<Task?>?> searchTask(String taskTitle) async {
   if (taskTitle.isEmpty) {
     throw ArgParserException("No title was provided. Exiting");
   }
-  Task? result = await getTask(taskTitle);
-  return result;
+  List<Task?>? results = await getTasks(taskTitle);
+  return results;
 }
 
-Future<Task?> getTask(String taskName) async {
+Future<List<Task?>?> getTasks(String taskName) async {
   final taskList = await loadTasks();
-  Task? taskFound = taskList.firstWhereOrNull((t) => t.title == taskName);
-  return taskFound;
+  final List<Task> tasksFound = taskList
+      .where((t) => t.title.toLowerCase().contains(taskName))
+      .toList();
+  return tasksFound;
 }
 
 Future<void> checkFileOrCreate(File file) async {
