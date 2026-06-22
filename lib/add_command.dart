@@ -2,7 +2,7 @@ import 'package:args/args.dart';
 import 'package:tasker/task.dart';
 
 ArgParser addCommand = ArgParser();
-ArgParser parser = ArgParser()
+ArgParser addParser = ArgParser()
   ..addFlag("help", abbr: "h", defaultsTo: false)
   ..addFlag("crucial", abbr: "c", defaultsTo: false)
   ..addOption("title", abbr: "t", mandatory: true)
@@ -23,14 +23,18 @@ Future<void> add(List<String>? args) async {
     printAddUsage();
     return;
   } else {
-    ArgResults results = parser.parse(args);
+    final results = addParser.parse(args);
     var taskExists = await searchTask(results["title"]);
+    if (taskExists != null) {
+      print("Task already exists");
+      return;
+    }
     if (taskExists == null) {
       Task task = Task(
         title: results["title"],
         status: results["status"].toString().toLowerCase().getStatus(),
         description: results["description"],
-        duteDate: DateTime.parse(results["due"]),
+        dueDate: DateTime.parse(results["due"]),
         crucial: results["crucial"],
       );
       await addTask(task);

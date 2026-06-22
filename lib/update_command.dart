@@ -8,7 +8,7 @@ void printUsage() {
 }
 
 ArgParser updateCommand = ArgParser();
-ArgParser parser = ArgParser()
+ArgParser updateParser = ArgParser()
   ..addCommand("update", updateCommand)
   ..addOption("title", abbr: "t");
 
@@ -25,7 +25,7 @@ Future<void> update(List<String>? inputArgs) async {
       await updateTask(taskTitle);
     }
   } else {
-    ArgResults results = parser.parse(inputArgs);
+    final results = updateParser.parse(inputArgs);
     updateTask(results['title'].toString());
   }
 }
@@ -79,16 +79,14 @@ void updateCrucial(Task t) {
     print("1.Crucial");
     print("0. Not Crucial");
     crucial = stdin.readLineSync();
-  } while (crucial == null ||
-      crucial.trim() == '' ||
-      crucial.trim() != '1' ||
-      crucial.trim() != '0');
+  } while ((crucial == null || crucial.trim() == '') ||
+      (crucial.trim() != '1' && crucial.trim() != '0'));
   t.crucial = crucial == '1' ? true : false;
 }
 
 void updateDate(Task t) {
   final DateTime dueDate = askForDate();
-  t.duteDate = dueDate;
+  t.dueDate = dueDate;
 }
 
 void updateStatus(Task t) {

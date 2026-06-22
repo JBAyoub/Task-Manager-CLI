@@ -4,7 +4,7 @@ import 'package:tasker/delete_command.dart';
 import 'package:tasker/search_command.dart';
 import 'package:tasker/update_command.dart';
 
-void run(List<String>? inputArgs) async {
+Future<void> run(List<String>? inputArgs) async {
   const version = "0.0.1";
   if (inputArgs == null || inputArgs.isEmpty || inputArgs.first == "help") {
     printUsage();

@@ -5,7 +5,7 @@ import 'package:tasker/task.dart';
 
 ArgParser searchCommand = ArgParser();
 
-ArgParser parser = ArgParser()
+ArgParser searchParser = ArgParser()
   ..addOption("title", abbr: "t")
   ..addFlag("help", abbr: "h", defaultsTo: false)
   ..addFlag("all", abbr: "a", defaultsTo: false)
@@ -26,7 +26,7 @@ Future<void> displaySearch(List<String>? inputArgs) async {
       print(t ?? "No task titled $taskTitle was found!");
     }
   } else {
-    ArgResults searchResult = parser.parse(inputArgs);
+    final searchResult = searchParser.parse(inputArgs);
     if (searchResult["title"] != null) {
       try {
         final Task? t = await searchTask(searchResult["title"].toLowerCase());

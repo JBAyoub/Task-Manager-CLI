@@ -8,14 +8,14 @@ class Task {
   String title;
   TaskStatus status;
   String? description;
-  DateTime? duteDate;
+  DateTime? dueDate;
   bool crucial = false;
 
   Task({
     required this.title,
     required this.status,
     required this.description,
-    required this.duteDate,
+    required this.dueDate,
     required this.crucial,
   });
 
@@ -24,24 +24,24 @@ class Task {
       title: json['title'].toString().toLowerCase(),
       status: json['status'].toString().getStatus(),
       description: json['description'].toString(),
-      duteDate: DateTime.tryParse(json['due date']),
+      dueDate: DateTime.tryParse(json['due date']),
       crucial: json["crucial"],
     );
   }
 
-  Map<dynamic, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       "title": title,
       "status": status.name,
       "description": description,
-      "due date": duteDate?.toIso8601String(),
+      "due date": dueDate?.toIso8601String(),
       "crucial": crucial,
     };
   }
 
   @override
   String toString() {
-    return "Task title: $title \n --->Description: $description \n --->Due Date: $duteDate \n --->Status: ${status.name} \n \n \n";
+    return "Task title: $title \n --->Description: $description \n --->Due Date: $dueDate \n --->Status: ${status.name} \n \n \n";
   }
 }
 
@@ -88,7 +88,7 @@ Future<void> addTask(Task task) async {
 
 Future<void> saveTasks(List<Task> tasks) async {
   final file = File("data/tasks.json");
-  checkFileOrCreate(file);
+  await checkFileOrCreate(file);
   final jsonList = tasks.map((task) => task.toJson()).toList();
   await file.writeAsString(jsonEncode(jsonList));
 }

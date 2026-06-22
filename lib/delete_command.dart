@@ -5,7 +5,7 @@ import 'package:tasker/command_runner.dart';
 import 'package:tasker/task.dart';
 
 ArgParser deleteCommand = ArgParser();
-ArgParser parser = ArgParser()
+ArgParser deleteParser = ArgParser()
   ..addOption("title", abbr: "t")
   ..addCommand("delete", deleteCommand)
   ..addFlag("all", abbr: "a", defaultsTo: false);
@@ -23,7 +23,7 @@ Future<void> deleteTask(List<String>? inputArgs) async {
       await seekAndDestroy(taskTitle);
     }
   } else {
-    ArgResults results = parser.parse(inputArgs);
+    final results = deleteParser.parse(inputArgs);
     if (results['all']) {
       await deleteAll();
       return;
