@@ -1,17 +1,26 @@
-The app should parse the command, validate the input, create a task object, save it to a local file, and print a clean result. You can add filters, sorting, task categories, recurring tasks, and export/import.
-
-The user runs commands like:
-
-> tasker add "study Dart" --priority high --due 2026-06-20
+The app should parse the command, validate the input, create a task object, save it to a local file, and print a clean result. This project uses these concepts: 
+Factory constructors
 
 
-> tasker list
+JSON serialization
 
 
-> tasker done 3
+Async file operations
 
 
-> tasker delete 5
+Enums
 
 
-> tasker search "study"
+Extensions
+
+
+CLI argument parsing
+
+
+CRUD design
+
+
+Basic validation loops
+
+
+Persistence layer concepts
