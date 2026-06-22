@@ -5,10 +5,10 @@ import 'package:args/args.dart';
 import 'package:collection/collection.dart';
 
 class Task {
-  final String title;
-  final TaskStatus status;
-  final String? description;
-  final DateTime? duteDate;
+  String title;
+  TaskStatus status;
+  String? description;
+  DateTime? duteDate;
   bool crucial = false;
 
   Task({
@@ -99,7 +99,7 @@ enum TaskStatus { Completed, Ongoing, Delayed, Fresh }
 extension GetStat on String {
   TaskStatus getStatus() {
     switch (toLowerCase()) {
-      case '':
+      case ('' || "fresh"):
         return TaskStatus.Fresh;
       case 'completed':
         return TaskStatus.Completed;
@@ -108,7 +108,7 @@ extension GetStat on String {
       case 'delayed':
         return TaskStatus.Delayed;
       default:
-        return TaskStatus.Fresh;
+        throw FormatException('Invalid status');
     }
   }
 }

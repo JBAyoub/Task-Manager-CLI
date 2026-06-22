@@ -2,8 +2,9 @@ import 'package:args/args.dart';
 import 'package:tasker/add_command.dart';
 import 'package:tasker/delete_command.dart';
 import 'package:tasker/search_command.dart';
+import 'package:tasker/update_command.dart';
 
-void run(List<String>? inputArgs) {
+void run(List<String>? inputArgs) async {
   const version = "0.0.1";
   if (inputArgs == null || inputArgs.isEmpty || inputArgs.first == "help") {
     printUsage();
@@ -14,15 +15,16 @@ void run(List<String>? inputArgs) {
 
   switch (inputArgs.first) {
     case "add":
-      add(inputArgs);
+      await add(inputArgs);
       break;
     case "delete":
-      deleteTask(inputArgs);
+      await deleteTask(inputArgs);
       break;
     case "search":
-      displaySearch(inputArgs);
+      await displaySearch(inputArgs);
       break;
     case "update":
+      await update(inputArgs);
   }
 }
 

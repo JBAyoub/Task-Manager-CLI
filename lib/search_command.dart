@@ -50,6 +50,7 @@ Future<void> displayAll() async {
   List<Task?> loadedTasks = await loadTasks();
   if (loadedTasks.isEmpty) {
     print("There are no Tasks yet! Time to make some!");
+    return;
   }
   for (var task in loadedTasks) {
     print(task);
