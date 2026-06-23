@@ -26,12 +26,35 @@ Tasker allows users to create, search, update, delete, and persist tasks directl
 - Input validation and error handling
 - Unique task identifiers
 
-## Technologies Used
+Concepts Practiced
 
-- Dart
-- `args` package for command-line argument parsing
-- `dart:io` for file operations
-- `dart:convert` for JSON serialization/deserialization
+This project was primarily built to strengthen understanding of:
+
+Object-Oriented Programming
+Classes
+Constructors
+Factory constructors
+Enums
+Extensions
+Encapsulation
+Asynchronous Programming
+Futures
+async / await
+File I/O operations
+Data Persistence
+Reading JSON from disk
+Writing JSON to disk
+Object serialization
+Object deserialization
+Command-Line Development
+Argument parsing
+Flags and options
+Interactive user input
+Command dispatching
+Error Handling
+try/catch blocks
+Validation loops
+User-friendly error messages
 
 ## Project Structure
 
