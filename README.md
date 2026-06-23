@@ -1,9 +1,4 @@
-Why This Project Exists
-
-The goal of this project was not simply to create a task manager, but to build a complete command-line application that exercises many of Dart's core language features in a realistic scenario.
-
-The application demonstrates experience with data modeling, persistence, asynchronous programming, CLI development, and software organization, providing a foundation for future Dart and Flutter projects.
-"""
+# Tasker CLI
 
 A command-line task management application built with Dart.
 
@@ -15,10 +10,6 @@ Tasker allows users to create, search, update, delete, and persist tasks directl
 - Search tasks by title
 - View all stored tasks
 - Update existing tasks
-  - Title
-  - Status
-  - Due date
-  - Priority flag
 - Delete tasks
 - Persistent local storage using JSON files
 - Command-line argument parsing
@@ -26,59 +17,12 @@ Tasker allows users to create, search, update, delete, and persist tasks directl
 - Input validation and error handling
 - Unique task identifiers
 
-## Concepts Practiced
+## Technologies Used
 
-This project was primarily built to strengthen understanding of:
-
--Object-Oriented Programming
-
--Classes
-
--Constructors
-
--Factory constructors
-
--Enums
-
--Extensions
-
--Encapsulation
-
--Asynchronous Programming
-
--Futures
-
--async / await
-
--File I/O operations
-
--Data Persistence
-
--Reading JSON from disk
-
--Writing JSON to disk
-
--Object serialization
-
--Object deserialization
-
--Command-Line Development
-
--Argument parsing
-
--Flags and options
-
--Interactive user input
-
--Command dispatching
-
--Error Handling
-
--try/catch blocks
-
--Validation loops
-
--User-friendly error messages
+- Dart
+- `args` package
+- `dart:io`
+- `dart:convert`
 
 ## Project Structure
 
@@ -96,3 +40,42 @@ data/
 
 bin/
 └── tasker.dart
+```
+
+## Example Commands
+
+```bash
+dart bin/tasker.dart add -t "Learn Dart"
+dart bin/tasker.dart search -t "dart"
+dart bin/tasker.dart search -a
+dart bin/tasker.dart update -t "Learn Dart"
+dart bin/tasker.dart delete -t "Learn Dart"
+```
+
+## Concepts Practiced
+
+- Classes and Objects
+- Constructors and Factory Constructors
+- Enums
+- Extensions
+- Async/Await
+- Futures
+- JSON Serialization
+- File Persistence
+- Error Handling
+- CLI Argument Parsing
+
+## Future Improvements
+
+- Filtering by status
+- Sorting by due date
+- SQLite support
+- Unit testing
+- Repository pattern
+- Categories and tags
+
+## Why This Project Exists
+
+The goal of this project was not simply to create a task manager, but to build a complete command-line application that exercises many of Dart's core language features in a realistic scenario.
+
+The application demonstrates experience with data modeling, persistence, asynchronous programming, CLI development, and software organization, providing a foundation for future Dart and Flutter projects.
