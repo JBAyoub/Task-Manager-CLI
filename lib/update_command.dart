@@ -19,7 +19,7 @@ Future<void> update(List<String>? inputArgs) async {
   String? id;
   if (inputArgs == null || inputArgs.isEmpty || inputArgs.length == 1) {
     printUsage();
-    print("Please a task title to update: ");
+    print("Please a task ID to update: ");
     id = stdin.readLineSync() ?? '';
     if (id == '') {
       print("No task id  was provided. Exiting");

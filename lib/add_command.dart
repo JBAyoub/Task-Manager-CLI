@@ -17,7 +17,7 @@ ArgParser addParser = ArgParser()
   ..addCommand("add", addCommand);
 
 Future<void> add(List<String>? args) async {
-  printAddUsage();
+  print(addParser.usage);
   if (args == null || args.isEmpty) {
     throw ArgParserException("No args were provided");
   } else if (args.contains("help") || args.contains("h")) {
@@ -25,6 +25,13 @@ Future<void> add(List<String>? args) async {
     return;
   } else {
     final results = addParser.parse(args);
+
+    if (!results.wasParsed("title")) {
+      print("Error: Title is required.");
+      print(addParser.usage);
+      return;
+    }
+
     Task task = Task(
       title: results["title"],
       status: results["status"].toString().toLowerCase().getStatus(),

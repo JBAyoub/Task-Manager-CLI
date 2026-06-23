@@ -8,11 +8,10 @@ Future<void> run(List<String>? inputArgs) async {
   const version = "0.0.1";
   if (inputArgs == null || inputArgs.isEmpty || inputArgs.first == "help") {
     printUsage();
-    throw ArgParserException("No arguments were provided. Exiting.");
+    return;
   } else if (inputArgs.first == "-v" || inputArgs.first == "version") {
     print("Tasker CLI Version: $version");
   }
-
   switch (inputArgs.first) {
     case "add":
       await add(inputArgs);
@@ -44,6 +43,6 @@ void printUsage() {
   print("Examples:");
   print('  dart bin/tasker.dart add -t "Learn Dart"');
   print('  dart bin/tasker.dart search -t "dart"');
-  print('  dart bin/tasker.dart update -t "Learn Dart"');
-  print('  dart bin/tasker.dart delete -t "Learn Dart"');
+  print('  dart bin/tasker.dart update -i "b6af8xE9fG"');
+  print('  dart bin/tasker.dart delete -i "b6af8xE9fG"');
 }

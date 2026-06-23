@@ -6,7 +6,7 @@ import 'package:tasker/task.dart';
 
 ArgParser deleteCommand = ArgParser();
 ArgParser deleteParser = ArgParser()
-  ..addOption("title", abbr: "t")
+  ..addOption("ID", abbr: "i")
   ..addCommand("delete", deleteCommand)
   ..addFlag("all", abbr: "a", defaultsTo: false);
 
