@@ -14,7 +14,7 @@ ArgParser searchParser = ArgParser()
 Future<void> displaySearch(List<String>? inputArgs) async {
   String? taskTitle;
   if (inputArgs == null || inputArgs.isEmpty || inputArgs.length == 1) {
-    printUsage();
+    printSearchUsage();
     print("Please a task title: ");
     taskTitle = stdin.readLineSync() ?? '';
     if (taskTitle == '') {
@@ -41,7 +41,7 @@ Future<void> displaySearch(List<String>? inputArgs) async {
       await displayAll();
     }
     if (searchResult["help"]) {
-      printUsage();
+      printSearchUsage();
     }
   }
 }
@@ -57,6 +57,18 @@ Future<void> displayAll() async {
   }
 }
 
-void printUsage() {
-  print("will eventually print the functionality of the search command");
+void printSearchUsage() {
+  print("Search for tasks.");
+  print("");
+  print("Usage:");
+  print("  tasker search [options]");
+  print("");
+  print("Options:");
+  print("  -t, --title     Search by title");
+  print("  -a, --all       Display all tasks");
+  print("  -h, --help      Show this help menu");
+  print("");
+  print("Examples:");
+  print('  dart bin/tasker.dart search -t "dart"');
+  print("  dart bin/tasker.dart search -a");
 }

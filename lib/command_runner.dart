@@ -29,9 +29,21 @@ Future<void> run(List<String>? inputArgs) async {
 }
 
 void printUsage() {
-  print(
-    "You can use this app to Create & Perform all kinds of operations on your tasks",
-  );
-  print("Syntax: dart /bin/tasker.dart <command>");
-  print("Available commands: 'add','search','help'");
+  print("Tasker - A simple CLI task manager");
+  print("");
+  print("Usage:");
+  print("dart bin/tasker.dart <command> [options]");
+  print("");
+  print("Commands:");
+  print("  add       Create a new task");
+  print("  search    Search for existing tasks");
+  print("  update    Update an existing task");
+  print("  delete    Delete a task");
+  print("  help      Show this help menu");
+  print("");
+  print("Examples:");
+  print('  dart bin/tasker.dart add -t "Learn Dart"');
+  print('  dart bin/tasker.dart search -t "dart"');
+  print('  dart bin/tasker.dart update -t "Learn Dart"');
+  print('  dart bin/tasker.dart delete -t "Learn Dart"');
 }

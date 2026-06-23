@@ -17,6 +17,7 @@ ArgParser addParser = ArgParser()
   ..addCommand("add", addCommand);
 
 Future<void> add(List<String>? args) async {
+  printAddUsage();
   if (args == null || args.isEmpty) {
     throw ArgParserException("No args were provided");
   } else if (args.contains("help") || args.contains("h")) {
@@ -36,7 +37,22 @@ Future<void> add(List<String>? args) async {
 }
 
 void printAddUsage() {
-  print("Will Later add functionality descirption and help to this func");
+  print("Create a new task.");
+  print("");
+  print("Usage:");
+  print("  tasker add [options]");
+  print("");
+  print("Options:");
+  print("  -t, --title         Task title (required)");
+  print("  -d, --description   Task description");
+  print("  -u, --due-date      Due date (YYYY-MM-DD)");
+  print("  -s, --status        Fresh | Ongoing | Delayed | Completed");
+  print("  -c, --crucial       Marks task as crucial");
+  print("");
+  print("Example:");
+  print(
+    '  dart bin/tasker.dart add -t "Learn Dart" -d "Finish OOP tutorial" -u 2027-01-01 -c',
+  );
 }
 
 extension on List<TaskStatus> {

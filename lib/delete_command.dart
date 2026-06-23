@@ -17,7 +17,9 @@ Future<void> deleteTask(List<String>? inputArgs) async {
     print("Please enter the Task's ID to delete: ");
     id = stdin.readLineSync() ?? '';
     if (id == '') {
+      printDeleteUsage();
       print("No Task ID was provided. Exiting");
+
       return;
     } else {
       await seekAndDestroy(id);
@@ -30,6 +32,19 @@ Future<void> deleteTask(List<String>? inputArgs) async {
     }
     seekAndDestroy(results["title"].toString());
   }
+}
+
+void printDeleteUsage() {
+  print("Delete a task.");
+  print("");
+  print("Usage:");
+  print("  tasker delete [options]");
+  print("");
+  print("Options:");
+  print("  -t, --title     Title of the task to delete");
+  print("");
+  print("Example:");
+  print('  dart bin/tasker.dart delete -t "Learn Dart"');
 }
 
 Future<void> seekAndDestroy(String id) async {

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
+import 'package:tasker/search_command.dart';
 import 'package:tasker/task.dart';
 
 void printUsage() {
@@ -10,27 +11,29 @@ void printUsage() {
 ArgParser updateCommand = ArgParser();
 ArgParser updateParser = ArgParser()
   ..addCommand("update", updateCommand)
-  ..addOption("title", abbr: "t");
+  ..addOption("id", abbr: "i");
 
 Future<void> update(List<String>? inputArgs) async {
-  String? taskTitle;
+  printUpdateUsage();
+  await displayAll();
+  String? id;
   if (inputArgs == null || inputArgs.isEmpty || inputArgs.length == 1) {
     printUsage();
     print("Please a task title to update: ");
-    taskTitle = stdin.readLineSync() ?? '';
-    if (taskTitle == '') {
-      print("No task title was provided. Exiting");
+    id = stdin.readLineSync() ?? '';
+    if (id == '') {
+      print("No task id  was provided. Exiting");
       return;
     } else {
-      await updateTask(taskTitle);
+      await updateTask(id);
     }
   } else {
     final results = updateParser.parse(inputArgs);
-    updateTask(results['title'].toString());
+    updateTask(results['id'].toString());
   }
 }
 
-Future<void> updateTask(String taskTitle) async {
+Future<void> updateTask(String id) async {
   List<Task>? loadedTasks = await loadTasks();
   if (loadedTasks.isEmpty) {
     print(
@@ -39,13 +42,13 @@ Future<void> updateTask(String taskTitle) async {
     return;
   }
   final int index = loadedTasks.indexWhere(
-    (t) => t.title.toLowerCase() == taskTitle.toLowerCase(),
+    (t) => t.id.toLowerCase() == id.toLowerCase(),
   );
   if (index == -1) {
-    print("The task $taskTitle could not be found. Exiting...");
+    print("The task $id could not be found. Exiting...");
   } else {
     final Task t = loadedTasks[index];
-    print("Task $taskTitle found! What would you like to update? \n");
+    print("Task $id found! What would you like to update? \n");
     print("1. Title");
     print("2. Status");
     print("3. Due Date");
@@ -132,4 +135,23 @@ DateTime askForDate() {
       print("Invalid date format. Use YYYY-MM-DD.");
     }
   }
+}
+
+void printUpdateUsage() {
+  print("Update an existing task.");
+  print("");
+  print("Usage:");
+  print("  tasker update [options]");
+  print("");
+  print("Options:");
+  print("  -t, --title     Title of the task to update");
+  print("");
+  print("Example:");
+  print('  dart bin/tasker.dart update -t "Learn Dart"');
+  print("");
+  print("You will then be prompted to choose:");
+  print("  1. Title");
+  print("  2. Status");
+  print("  3. Due Date");
+  print("  4. Crucial");
 }
