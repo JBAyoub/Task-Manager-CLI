@@ -48,8 +48,8 @@ bin/
 dart bin/tasker.dart add -t "Learn Dart"
 dart bin/tasker.dart search -t "dart"
 dart bin/tasker.dart search -a
-dart bin/tasker.dart update -t "Learn Dart"
-dart bin/tasker.dart delete -t "Learn Dart"
+dart bin/tasker.dart update -i "<ID>"
+dart bin/tasker.dart delete -i "<ID>"
 ```
 
 ## Concepts Practiced
